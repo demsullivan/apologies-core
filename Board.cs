@@ -92,8 +92,16 @@ namespace ApologiesCore {
 
         public void MoveToken(IPlayerToken token, int count)
         {
-            token.Position = token.Position + count;
-            // TODO: wraparound position
+            if (token.Position + count > tiles.Length)
+            {
+                token.Position = (token.Position + count) - tiles.Length;
+            }
+            else
+            {
+                token.Position += count;    
+            }
+            
+            
             Tile currentTile = tiles[token.Position];
 
             // TODO: delegate actions based on tile type
